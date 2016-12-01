@@ -13,9 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20161201145457) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
   create_table "cart_code_promotions", force: :cascade do |t|
     t.integer  "cart_id"
     t.integer  "promotion_id"
@@ -56,12 +53,12 @@ ActiveRecord::Schema.define(version: 20161201145457) do
     t.string   "name"
     t.string   "email"
     t.string   "address"
-    t.integer  "card_number"
+    t.integer  "card_number", limit: 8
     t.integer  "card_month"
     t.integer  "card_year"
     t.integer  "card_cvv"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
   end
 
   create_table "items", force: :cascade do |t|

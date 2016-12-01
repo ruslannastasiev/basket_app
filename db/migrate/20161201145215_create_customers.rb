@@ -4,7 +4,7 @@ class CreateCustomers < ActiveRecord::Migration
       t.string :name
       t.string :email
       t.string :address
-      t.integer :card_number
+      t.integer :card_number, limit: 8
       t.integer :card_month
       t.integer :card_year
       t.integer :card_cvv
