@@ -42,10 +42,4 @@ class CartItemsController < ApplicationController
   def find_items
     @cart_items = current_cart.cart_items
   end
-  
-
-  # private
-  # def find_model
-  #   @model = CartItems.find(params[:id]) if params[:id]
-  # end
 end

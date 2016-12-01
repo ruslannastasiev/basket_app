@@ -55,11 +55,15 @@ Rails.application.routes.draw do
   #   end
 
   resource :cart, only: [:show] do
-    post '/add_code_promotion/:promotion_id' => 'carts#add_code_promotion', :as => 'add_promotion'
-    delete '/destroy_promotion/:promotion_id' => 'carts#destroy_promotion', :as => 'destroy_promotion'
+    post '/approve/' => 'carts#approve', as: 'approve'
+    post '/reset' => 'carts#reset', as: 'reset'
   end
 
+  resources :promotions, only: [:create, :destroy]
+
   resources :cart_items, only: [:create, :update, :destroy]
+
+  resources :customers, only: [:create]
 
   root "carts#show"
 end

@@ -1,6 +1,5 @@
 class CartsController < ApplicationController
   before_action :current_cart
-  before_filter :find_promotion, only: [:add_code_promotion, :destroy_promotion]
 
   def show
     @items = Item.all
@@ -8,22 +7,13 @@ class CartsController < ApplicationController
     @promotions = CodePromotion.all
   end
 
-  def add_code_promotion
-    unless @cart.code_promotions.exists? @promotion
-      @cart.code_promotions << @promotion
-    end
-
-    redirect_to root_path, notice: 'Promotion was successfully added.'
+  def approve
+    @cart.approve
+    redirect_to root_path, notice: "Cart was succesfully approved."   
   end
 
-  def destroy_promotion
-    @cart.code_promotions.delete @promotion
-    redirect_to root_path, notice: 'Promotion was successfully destroyed from cart.'
-  end
-
-  private
-
-  def find_promotion
-    @promotion = CodePromotion.find(params[:promotion_id])
+  def reset
+    session[:cart_id] = nil
+    redirect_to root_path
   end
 end
