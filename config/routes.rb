@@ -53,4 +53,17 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+
+  resource :cart, only: [:show] do
+    post '/approve/' => 'carts#approve', as: 'approve'
+    post '/reset' => 'carts#reset', as: 'reset'
+  end
+
+  resources :promotions, only: [:create, :destroy]
+
+  resources :cart_items, only: [:create, :update, :destroy]
+
+  resources :customers, only: [:create]
+
+  root "carts#show"
 end
