@@ -53,4 +53,13 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+
+  resource :cart, only: [:show] do
+    post '/add_code_promotion/:promotion_id' => 'carts#add_code_promotion', :as => 'add_promotion'
+    delete '/destroy_promotion/:promotion_id' => 'carts#destroy_promotion', :as => 'destroy_promotion'
+  end
+
+  resources :cart_items, only: [:create, :update, :destroy]
+
+  root "carts#show"
 end

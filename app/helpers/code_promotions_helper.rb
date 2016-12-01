@@ -1,0 +1,2 @@
+module CodePromotionsHelper
+end
