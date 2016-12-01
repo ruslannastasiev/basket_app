@@ -1,0 +1,26 @@
+<tr>
+  <td><%= cart_item.item.name %></td>
+  <td><%= number_to_currency(cart_item.item_price, :unit => "£") %> X </td>
+  <%= form_for cart_item, url: cart_item_path(cart_item) do |f| %>
+    <td>
+      <%= f.hidden_field :item_id, value: cart_item.item_id %>
+      <%= f.number_field :quantity, value: cart_item.quantity, class: "form-control", min: 1, style: "width: 70px;" %>
+    </td>
+    <td>
+      - <%= number_to_currency(cart_item.item_discount, :unit => "£") %>
+      <% unless cart_item.discounted? %>
+        <span class="label label-success">
+          <%= "(#{cart_item.item.quantity_promotion.try(:name)})" %>
+        </span>
+      <% end %>  
+    </td>
+    <td>= <%= number_to_currency(cart_item.total_price, :unit => "£") %></td>            
+
+    <td>
+      <%= f.submit "Update", class: "btn btn-info" %>
+    </td>
+  <% end %>
+  <td>
+    <%= link_to "x", cart_item, method: :delete, confirm: "Are you sure?", class: 'btn btn-danger' %> 
+  </td>  
+</tr>

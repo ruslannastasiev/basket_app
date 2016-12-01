@@ -1,0 +1,46 @@
+<h3>Cart</h3>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Quantity</th>
+      <th>Quantity Discount</th>
+      <th>Price</th>
+      <th colspan="2">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @cart_items.each do |cart_item| %>
+      <%= render 'cart_item', cart_item: cart_item %>
+    <% end %>
+  </tbody>
+</table>
+<div class="pull-right">
+  <table class="table table-stripered">
+    <tbody>
+      <% @cart.code_promotions.each do |promotion| %>
+        <tr>
+          <td><%= promotion.name %></td>
+          <td>
+            <%= link_to "x", promotion_path(id: promotion.id), method: :delete, confirm: "Are you sure?", class: 'btn btn-danger' %> 
+          </td> 
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <table class="table table-stripered">
+    <thead>
+      <td>Sub Total</td>
+      <td>Discount(Only Code Promotions)</td>
+      <td>Total Price</td>
+    </thead>
+    <tbody>
+      <tr>
+        <td><%= number_to_currency(@cart.sub_total, :unit => "£") %></td>
+        <td><%= number_to_currency(@cart.discount, :unit => "£") %></td>
+        <td><%= number_to_currency(@cart.total_price, :unit => "£") %></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

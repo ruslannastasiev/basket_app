@@ -1,0 +1,21 @@
+<h3>Code Promotions</h3>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @promotions.each do |promotion| %>
+      <tr>
+        <td><%= promotion.name %></td>
+        <%= form_for @cart, url: promotions_path(id: promotion.id), method: :post do |f| %>
+          <td>
+            <%= f.submit "Add To Cart", class: "btn btn-info" %>
+          </td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,28 @@
+<h3>Items</h3>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Quantity</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @items.each do |item| %>
+      <tr>
+        <td><%= item.name %></td>
+        <td><%= number_to_currency(item.price, :unit => "£") %></td>
+        <%= form_for CartItem.new, url: cart_items_path do |f| %>
+          <td>
+              <%= f.hidden_field :item_id, value: item.id %>
+              <%= f.number_field :quantity, value: 1, class: "form-control", min: 1, style: "width: 70px;" %>
+          </td>
+          <td>
+            <%= f.submit "Add To Cart", class: "btn btn-info" %>
+          </td>
+        <% end %>
+      </tr>
+    <% end %>  
+  </tbody>
+</table>
