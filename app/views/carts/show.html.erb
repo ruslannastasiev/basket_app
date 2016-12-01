@@ -89,7 +89,11 @@
               </td>
               <td>
                 - <%= number_to_currency(cart_item.item_discount, :unit => "£") %>
-                <%= "(#{cart_item.item.quantity_promotion.try(:name)})" unless cart_item.item_discount.zero?  %>
+                <% unless cart_item.discounted? %>
+                  <span class="label label-success">
+                    <%= "(#{cart_item.item.quantity_promotion.try(:name)})" %>
+                  </span>
+                <% end %>  
               </td>
               <td>= <%= number_to_currency(cart_item.total_price, :unit => "£") %></td>            
 

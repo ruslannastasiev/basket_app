@@ -28,6 +28,10 @@ class CartItem < ActiveRecord::Base
     item_price * quantity - total_price
   end
 
+  def discounted?
+    item_discount.zero?
+  end
+
   private
 
   def calculate_prices
