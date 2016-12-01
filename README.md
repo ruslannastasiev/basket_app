@@ -7,7 +7,7 @@
   `bundle exec rails s`  
 
 * Database creation
-  rake db:setup
+  `rake db:setup`
   ------ or ------
   `rake db:create`
   `rake db:migrate`
